@@ -7,7 +7,6 @@ defmodule MatchMenuWeb.Router do
 
   scope "/", MatchMenuWeb do
     pipe_through :api
-
     get "/", BaseController, :index
   end
 end

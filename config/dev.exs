@@ -46,17 +46,6 @@ config :match_menu, MatchMenuWeb.Endpoint,
 # configured to run both http and https servers on
 # different ports.
 
-# Watch static and templates for browser reloading.
-config :match_menu, MatchMenuWeb.Endpoint,
-  live_reload: [
-    patterns: [
-      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
-      ~r"priv/gettext/.*(po)$",
-      ~r"lib/match_menu_web/(live|views)/.*(ex)$",
-      ~r"lib/match_menu_web/templates/.*(eex)$"
-    ]
-  ]
-
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 

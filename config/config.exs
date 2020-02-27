@@ -13,10 +13,10 @@ config :match_menu,
 # Configures the endpoint
 config :match_menu, MatchMenuWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "fGO21cNPRxYFG8+ZXLUgOwpIYdyJTfLyHtsjBwPOMef3QnkAQtD+PnKSlpi5UHIh",
-  render_errors: [view: MatchMenuWeb.ErrorView, accepts: ~w(html json)],
+  secret_key_base: "P7IejWDnSelaQZqnHO3pemzpndxyJKMX1OdmL638L5JMauKKL2UnjQtvWkNOBd8n",
+  render_errors: [view: MatchMenuWeb.ErrorView, accepts: ~w(json)],
   pubsub: [name: MatchMenu.PubSub, adapter: Phoenix.PubSub.PG2],
-  live_view: [signing_salt: "2dO70urM"]
+  live_view: [signing_salt: "eHVLgjTG"]
 
 # Configures Elixir's Logger
 config :logger, :console,
