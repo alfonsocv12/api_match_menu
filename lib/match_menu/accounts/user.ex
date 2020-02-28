@@ -5,6 +5,9 @@ defmodule MatchMenu.Accounts.User do
   schema "users" do
     field :email, :string
     field :password_hash, :string
+    #virtual fields
+    field :password, :string, virtual: true
+    field :password_confirmation, :string, virtual: true
 
     timestamps()
   end
@@ -12,8 +15,11 @@ defmodule MatchMenu.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :password_hash])
-    |> validate_required([:email, :password_hash])
+    |> cast(attrs, [:email, :password, :password_confirmation])
+    |> validate_required([:email, :password, :password_confirmation])
+    |> validate_format(:email, ~r/@/)
+    |> validate_length(:password, min: 6)
+    |> validate_confirmation(:password)
     |> unique_constraint(:email)
   end
 end
