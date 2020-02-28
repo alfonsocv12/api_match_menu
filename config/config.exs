@@ -26,6 +26,11 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+#Use gardian to generate de jwt token
+config :myApi, MyApi.Guardian,
+       issuer: "myApi",
+       secret_key: "RkjAPm8iRqrQzH8RYYGOAhiCay20oZ3JyUwtubCAabTD1aPOSgy7EjVV4Ku+Q+F3"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
