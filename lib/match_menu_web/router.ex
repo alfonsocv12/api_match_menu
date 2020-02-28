@@ -10,6 +10,6 @@ defmodule MatchMenuWeb.Router do
 
     get "/", BaseController, :index
 
-    post "/auth", UserController, :login
+    resources "/users", UserController, only: [:create, :show]
   end
 end
