@@ -20,6 +20,12 @@ defmodule MatchMenuWeb.FallbackController do
     |> render(:"404")
   end
 
+  def call(conn, {:error, claims}) do
+    conn
+    |> put_status(:unprocessable_entity)
+    |> json(%{error: claims})
+  end
+
   def call(conn, {:error, :unauthorized}) do
     conn
     |> put_status(:unauthorized)
