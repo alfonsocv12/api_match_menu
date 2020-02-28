@@ -29,7 +29,7 @@ config :phoenix, :json_library, Jason
 #
 config :match_menu, MatchMenu.Guardian,
        issuer: "MatchMenu",
-       secret_key: "RhIZzBiukhYuUpzXqtp6OGUqdHhVe6G8gz5D/yZKiPi5w6gx+RSqFa6NLQSGKVCy"
+       secret_key: %{"k" => "8OI0ok1Sa6diW4jvYEYkxA", "kty" => "oct"}
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

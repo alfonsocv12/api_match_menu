@@ -19,4 +19,17 @@ defmodule MatchMenuWeb.FallbackController do
     |> put_view(MatchMenuWeb.ErrorView)
     |> render(:"404")
   end
+
+  def call(conn, {:error, claims}) do
+    conn
+    |> put_status(:unprocessable_entity)
+    # |> put_view(MatchMenuWeb.ChangesetView)
+    |> json(%{error: claims})
+  end
+
+  def call(conn, {:error, :unauthorized}) do
+    conn
+    |> put_status(:unauthorized)
+    |> json(%{error: "Login error"})
+  end
 end
