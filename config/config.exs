@@ -27,8 +27,8 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 #Use gardian to generate de jwt token
-config :myApi, MyApi.Guardian,
-       issuer: "myApi",
+config :match_menu, MatchMenu.Guardian,
+       issuer: "MatchMenu",
        secret_key: "RkjAPm8iRqrQzH8RYYGOAhiCay20oZ3JyUwtubCAabTD1aPOSgy7EjVV4Ku+Q+F3"
 
 # Import environment specific config. This must remain at the bottom
