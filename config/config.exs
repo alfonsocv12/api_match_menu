@@ -26,17 +26,10 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-<<<<<<< HEAD
-#Use gardian to generate de jwt token
-config :match_menu, MatchMenu.Guardian,
-       issuer: "MatchMenu",
-       secret_key: "RkjAPm8iRqrQzH8RYYGOAhiCay20oZ3JyUwtubCAabTD1aPOSgy7EjVV4Ku+Q+F3"
-=======
 #
 config :match_menu, MatchMenu.Guardian,
        issuer: "MatchMenu",
        secret_key: "RkjAPm8iRqrQzH8RYYGOAhiCay20oZ3JyUwtubCAabTD1aPOSgy7EjVV4Ku+Q+F3"
->>>>>>> feature/authUser
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
