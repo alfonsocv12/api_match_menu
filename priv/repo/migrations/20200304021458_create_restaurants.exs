@@ -12,6 +12,6 @@ defmodule MatchMenu.Repo.Migrations.CreateRestaurants do
       timestamps()
     end
 
-    create unique_index(:restaurants, [:user_alias])
+    create unique_index(:restaurants, [:restaurant_alias])
   end
 end

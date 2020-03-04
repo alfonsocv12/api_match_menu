@@ -27,6 +27,11 @@ defmodule MatchMenuWeb.Router do
     post "/sign_up", RestaurantController, :create
   end
 
+  scope "/restaurant", MatchMenuWeb do
+    pipe_through [:api, :jwt_authenticated]
+
+    get "/my_restaurant", RestaurantController, :show
+  end
 
   scope "/", MatchMenuWeb do
     pipe_through [:api, :jwt_authenticated]
