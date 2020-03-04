@@ -38,6 +38,9 @@ defmodule MatchMenuWeb.Endpoint do
     pass: ["*/*"],
     json_decoder: Phoenix.json_library()
 
+  #cors_plug
+  plug CORSPlug
+
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
