@@ -2,6 +2,7 @@ defmodule MatchMenuWeb.Router do
   use MatchMenuWeb, :router
 
   alias MatchMenu.Guardian
+  alias MatchMenu.RestaurantGuardian
 
   pipeline :api do
     plug :accepts, ["json"]
@@ -9,6 +10,10 @@ defmodule MatchMenuWeb.Router do
 
   pipeline :jwt_authenticated do
     plug Guardian.AuthPipeline
+  end
+
+  pipeline :resta_jwt_authenticated do
+    plug RestaurantGuardian.AuthPipelineResta
   end
 
   scope "/", MatchMenuWeb do
@@ -28,7 +33,7 @@ defmodule MatchMenuWeb.Router do
   end
 
   scope "/restaurant", MatchMenuWeb do
-    pipe_through [:api, :jwt_authenticated]
+    pipe_through [:api, :resta_jwt_authenticated]
 
     get "/my_restaurant", RestaurantController, :show
   end
