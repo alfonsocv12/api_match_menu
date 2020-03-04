@@ -10,16 +10,14 @@ defmodule MatchMenu.Accounts do
   alias MatchMenu.Accounts.Restaurant
   alias MatchMenu.Accounts.User
   alias MatchMenu.Guardian
+  alias MatchMenu.RestaurantGuardian
 
 
   @doc """
   Returns the list of users.
-
   ## Examples
-
       iex> list_users()
       [%User{}, ...]
-
   """
   def list_users do
     Repo.all(User)
@@ -27,31 +25,22 @@ defmodule MatchMenu.Accounts do
 
   @doc """
   Gets a single user.
-
   Raises `Ecto.NoResultsError` if the User does not exist.
-
   ## Examples
-
       iex> get_user!(123)
       %User{}
-
       iex> get_user!(456)
       ** (Ecto.NoResultsError)
-
   """
   def get_user!(id), do: Repo.get!(User, id)
 
   @doc """
   Creates a user.
-
   ## Examples
-
       iex> create_user(%{field: value})
       {:ok, %User{}}
-
       iex> create_user(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
-
   """
   def create_user(attrs \\ %{}) do
     %User{}
@@ -61,15 +50,11 @@ defmodule MatchMenu.Accounts do
 
   @doc """
   Updates a user.
-
   ## Examples
-
       iex> update_user(user, %{field: new_value})
       {:ok, %User{}}
-
       iex> update_user(user, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
-
   """
   def update_user(%User{} = user, attrs) do
     user
@@ -79,15 +64,11 @@ defmodule MatchMenu.Accounts do
 
   @doc """
   Deletes a user.
-
   ## Examples
-
       iex> delete_user(user)
       {:ok, %User{}}
-
       iex> delete_user(user)
       {:error, %Ecto.Changeset{}}
-
   """
   def delete_user(%User{} = user) do
     Repo.delete(user)
@@ -95,12 +76,9 @@ defmodule MatchMenu.Accounts do
 
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking user changes.
-
   ## Examples
-
       iex> change_user(user)
       %Ecto.Changeset{source: %User{}}
-
   """
   def change_user(%User{} = user) do
     User.changeset(user, %{})
@@ -144,12 +122,9 @@ defmodule MatchMenu.Accounts do
 
   @doc """
   Returns the list of restaurants.
-
   ## Examples
-
       iex> list_restaurants()
       [%Restaurant{}, ...]
-
   """
   def list_restaurants do
     Repo.all(Restaurant)
@@ -157,31 +132,22 @@ defmodule MatchMenu.Accounts do
 
   @doc """
   Gets a single restaurant.
-
   Raises `Ecto.NoResultsError` if the Restaurant does not exist.
-
   ## Examples
-
       iex> get_restaurant!(123)
       %Restaurant{}
-
       iex> get_restaurant!(456)
       ** (Ecto.NoResultsError)
-
   """
   def get_restaurant!(id), do: Repo.get!(Restaurant, id)
 
   @doc """
   Creates a restaurant.
-
   ## Examples
-
       iex> create_restaurant(%{field: value})
       {:ok, %Restaurant{}}
-
       iex> create_restaurant(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
-
   """
   def create_restaurant(attrs \\ %{}) do
     %Restaurant{}
@@ -191,15 +157,11 @@ defmodule MatchMenu.Accounts do
 
   @doc """
   Updates a restaurant.
-
   ## Examples
-
       iex> update_restaurant(restaurant, %{field: new_value})
       {:ok, %Restaurant{}}
-
       iex> update_restaurant(restaurant, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
-
   """
   def update_restaurant(%Restaurant{} = restaurant, attrs) do
     restaurant
@@ -209,15 +171,11 @@ defmodule MatchMenu.Accounts do
 
   @doc """
   Deletes a restaurant.
-
   ## Examples
-
       iex> delete_restaurant(restaurant)
       {:ok, %Restaurant{}}
-
       iex> delete_restaurant(restaurant)
       {:error, %Ecto.Changeset{}}
-
   """
   def delete_restaurant(%Restaurant{} = restaurant) do
     Repo.delete(restaurant)
@@ -225,12 +183,9 @@ defmodule MatchMenu.Accounts do
 
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking restaurant changes.
-
   ## Examples
-
       iex> change_restaurant(restaurant)
       %Ecto.Changeset{source: %Restaurant{}}
-
   """
   def change_restaurant(%Restaurant{} = restaurant) do
     Restaurant.changeset(restaurant, %{})
@@ -242,7 +197,7 @@ defmodule MatchMenu.Accounts do
   def resta_token_sign_in(restaurant_alias, password) do
       case alias_password_auth(restaurant_alias, password) do
         {:ok, restaurant} ->
-          Guardian.encode_and_sign(restaurant)
+          RestaurantGuardian.encode_and_sign(restaurant)
         _ ->
           {:error, :unauthorized}
       end
