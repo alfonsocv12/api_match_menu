@@ -20,12 +20,14 @@
 
 
 |------------------------------------------------------------------------------------------------------|
-|               restauran               |               |                    mesas                     |
-|-----------|--------|--------|---------|---------------|----------------|----------|--------|---------|
-| id        | int    | unique |         |               | id             | int      | unique | notnull |
-| name      | String |        | notnull |               | restaurante_id | int      |        | notnull |
-| polyline  | json   |        | notnull |               | name           | int      |        | notnull |
-|           |        |        |         |               | available      | tiny int |        | notnull |
+|               restauran                    |          |                    mesas                     |
+|---------------|--------|--------|----------|----------|----------------|----------|--------|---------|
+| id            | int    | unique |          |          | id             | int      | unique | notnull |
+| alias         | String | unique | notnull  |          | restaurante_id | int      |        | notnull |              
+| name          | String |        | notnull  |          | name           | int      |        | notnull |
+| polyline      | json   |        | notnull  |          | available      | tiny int |        | notnull |
+| logo          | url    |        | nullable |          |                |          |        |         |
+| password_hash | String |        | notnull  |          |                |          |        |         |
 |------------------------------------------------------------------------------------------------------|
 
 

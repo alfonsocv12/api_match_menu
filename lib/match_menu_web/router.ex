@@ -2,7 +2,7 @@ defmodule MatchMenuWeb.Router do
   use MatchMenuWeb, :router
 
   alias MatchMenu.Guardian
-  
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -13,12 +13,20 @@ defmodule MatchMenuWeb.Router do
 
   scope "/", MatchMenuWeb do
     pipe_through :api
-    IO.puts("etnro")
+
     get "/", BaseController, :index
 
     post "/sign_in", UserController, :sign_in
     post "/sign_up", UserController, :create
   end
+
+  scope "/restaurant", MatchMenuWeb do
+    pipe_through :api
+
+    # post "/sign_in", RestaurantController, :sign_in
+    post "/sign_up", RestaurantController, :create
+  end
+
 
   scope "/", MatchMenuWeb do
     pipe_through [:api, :jwt_authenticated]
