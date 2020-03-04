@@ -106,7 +106,7 @@ defmodule MatchMenu.Accounts do
   end
 
   @doc """
-  We start the authentication here
+  We start the authentication for users here
   """
   def token_sign_in(email, password) do
       case email_password_auth(email, password) do
@@ -236,4 +236,40 @@ defmodule MatchMenu.Accounts do
   def change_restaurant(%Restaurant{} = restaurant) do
     Restaurant.changeset(restaurant, %{})
   end
+
+  @doc """
+  We start the authentication for restaurants here
+  """
+  def token_sign_in(user_alias, password) do
+      case alias_password_auth(user_alias, password) do
+        {:ok, restaurant} ->
+          Guardian.encode_and_sign(restaurant)
+        _ ->
+          {:error, :unauthorized}
+      end
+  end
+
+  defp alias_password_auth(user_alias, password) when is_binary(user_alias) and is_binary(password) do
+      with {:ok, restaurant} <- get_by_alias(user_alias),
+      do: verify_password(password, restaurant)
+  end
+
+  defp get_by_alias(user_alias) when is_binary(user_alias) do
+    case Repo.get_by(Restaurant, alias: user_alias) do
+      nil ->
+        Bcrypt.dummy_checkpw()
+        {:error, "Login error."}
+      restaurant ->
+        {:ok, restaurant}
+    end
+  end
+
+  defp verify_password(password, %Restaurant{} = restaurant) when is_binary(password) do
+    if Bcrypt.verify_pass(password, restaurant.password_hash) do
+      {:ok, restaurant}
+    else
+      {:error, :invalid_password}
+    end
+  end
+
 end

@@ -3,6 +3,7 @@ defmodule MatchMenuWeb.RestaurantController do
 
   alias MatchMenu.Accounts
   alias MatchMenu.Accounts.Restaurant
+  alias MatchMenu.Guardian
 
   action_fallback MatchMenuWeb.FallbackController
 
@@ -12,10 +13,11 @@ defmodule MatchMenuWeb.RestaurantController do
   end
 
   def create(conn, _params) do
-    with {:ok, %Restaurant{} = restaurant} <- Accounts.create_restaurant(_params) do
+    with {:ok, %Restaurant{} = restaurant} <- Accounts.create_restaurant(_params),
+         {:ok, token, _claims} <- Guardian.encode_and_sign(restaurant) do
       conn
       |> put_status(:created)
-      |> render("show.json", restaurant: restaurant)
+      |> render("jwt.json", jwt: token)
     end
   end
 
@@ -37,6 +39,15 @@ defmodule MatchMenuWeb.RestaurantController do
 
     with {:ok, %Restaurant{}} <- Accounts.delete_restaurant(restaurant) do
       send_resp(conn, :no_content, "")
+    end
+  end
+
+  def sign_in(conn, %{"alias" => user_alias, "password" => password}) do
+    case Restaurant.token_sign_in(user_alias, password) do
+      {:ok, token, _claims} ->
+        conn |> render("jwt.json", jwt: token)
+      _ ->
+        {:error, :unauthorized}
     end
   end
 end

@@ -23,7 +23,7 @@ defmodule MatchMenuWeb.Router do
   scope "/restaurant", MatchMenuWeb do
     pipe_through :api
 
-    # post "/sign_in", RestaurantController, :sign_in
+    post "/sign_in", RestaurantController, :sign_in
     post "/sign_up", RestaurantController, :create
   end
 

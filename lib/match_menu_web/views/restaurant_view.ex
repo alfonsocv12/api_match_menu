@@ -18,4 +18,8 @@ defmodule MatchMenuWeb.RestaurantView do
       logo: restaurant.logo,
       password_hash: restaurant.password_hash}
   end
+
+  def render("jwt.json", %{jwt: jwt}) do
+    %{jwt: jwt}
+  end
 end
