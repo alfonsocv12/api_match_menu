@@ -7,6 +7,7 @@ defmodule MatchMenu.Accounts do
   # import Comeonin.Bcrypt, only: [verify_pass: 2, dummy_checkpw: 0]
 
   alias MatchMenu.Repo
+  alias MatchMenu.Accounts.Restaurant
   alias MatchMenu.Accounts.User
   alias MatchMenu.Guardian
 
@@ -141,8 +142,6 @@ defmodule MatchMenu.Accounts do
   end
 
 
-  alias MatchMenu.Accounts.Restaurant
-
   @doc """
   Returns the list of restaurants.
 
@@ -240,8 +239,8 @@ defmodule MatchMenu.Accounts do
   @doc """
   We start the authentication for restaurants here
   """
-  def token_sign_in(user_alias, password) do
-      case alias_password_auth(user_alias, password) do
+  def resta_token_sign_in(restaurant_alias, password) do
+      case alias_password_auth(restaurant_alias, password) do
         {:ok, restaurant} ->
           Guardian.encode_and_sign(restaurant)
         _ ->
@@ -249,13 +248,13 @@ defmodule MatchMenu.Accounts do
       end
   end
 
-  defp alias_password_auth(user_alias, password) when is_binary(user_alias) and is_binary(password) do
-      with {:ok, restaurant} <- get_by_alias(user_alias),
-      do: verify_password(password, restaurant)
+  defp alias_password_auth(restaurant_alias, password) when is_binary(restaurant_alias) and is_binary(password) do
+      with {:ok, restaurant} <- get_by_restaurant_alias(restaurant_alias),
+      do: verify_password_resta(password, restaurant)
   end
 
-  defp get_by_alias(user_alias) when is_binary(user_alias) do
-    case Repo.get_by(Restaurant, alias: user_alias) do
+  defp get_by_restaurant_alias(restaurant_alias) when is_binary(restaurant_alias) do
+    case Repo.get_by(Restaurant, restaurant_alias: restaurant_alias) do
       nil ->
         Bcrypt.dummy_checkpw()
         {:error, "Login error."}
@@ -264,7 +263,7 @@ defmodule MatchMenu.Accounts do
     end
   end
 
-  defp verify_password(password, %Restaurant{} = restaurant) when is_binary(password) do
+  defp verify_password_resta(password, %Restaurant{} = restaurant) when is_binary(password) do
     if Bcrypt.verify_pass(password, restaurant.password_hash) do
       {:ok, restaurant}
     else

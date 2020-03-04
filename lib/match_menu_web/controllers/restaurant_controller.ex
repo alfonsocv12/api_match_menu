@@ -42,8 +42,8 @@ defmodule MatchMenuWeb.RestaurantController do
     end
   end
 
-  def sign_in(conn, %{"alias" => user_alias, "password" => password}) do
-    case Restaurant.token_sign_in(user_alias, password) do
+  def sign_in(conn, %{"restaurant_alias" => restaurant_alias, "password" => password}) do
+    case MatchMenu.Accounts.resta_token_sign_in(restaurant_alias, password) do
       {:ok, token, _claims} ->
         conn |> render("jwt.json", jwt: token)
       _ ->

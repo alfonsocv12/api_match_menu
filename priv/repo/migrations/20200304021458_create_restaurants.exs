@@ -3,7 +3,7 @@ defmodule MatchMenu.Repo.Migrations.CreateRestaurants do
 
   def change do
     create table(:restaurants) do
-      add :alias, :string
+      add :restaurant_alias, :string
       add :name, :string
       add :polyline, :string
       add :logo, :string
@@ -12,6 +12,6 @@ defmodule MatchMenu.Repo.Migrations.CreateRestaurants do
       timestamps()
     end
 
-    create unique_index(:restaurants, [:alias])
+    create unique_index(:restaurants, [:user_alias])
   end
 end

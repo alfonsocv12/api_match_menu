@@ -3,7 +3,7 @@ defmodule MatchMenu.Accounts.Restaurant do
   import Ecto.Changeset
 
   schema "restaurants" do
-    field :alias, :string
+    field :restaurant_alias, :string
     field :logo, :string
     field :name, :string
     field :password_hash, :string
@@ -19,11 +19,11 @@ defmodule MatchMenu.Accounts.Restaurant do
   def changeset(restaurant, attrs) do
     restaurant
     |> cast(attrs,
-      [:alias, :name, :polyline, :logo, :password, :password_confirmation])
-    |> validate_required([:alias, :name, :password, :password_confirmation])
+      [:restaurant_alias, :name, :polyline, :logo, :password, :password_confirmation])
+    |> validate_required([:restaurant_alias, :name, :password, :password_confirmation])
     |> validate_length(:password, min: 6)
     |> validate_confirmation(:password)
-    |> unique_constraint(:alias)
+    |> unique_constraint(:restaurant_alias)
     |> put_password_hash
   end
 
