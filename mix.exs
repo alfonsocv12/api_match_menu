@@ -33,7 +33,6 @@ defmodule MatchMenu.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:cors_plug, "~> 2.0"},
       {:phoenix, "~> 1.4.14"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 4.0"},
