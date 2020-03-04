@@ -12,7 +12,7 @@ defmodule MatchMenuWeb.RestaurantView do
 
   def render("restaurant.json", %{restaurant: restaurant}) do
     %{id: restaurant.id,
-      restaurant_alias: restaurant.restaurant_alias,
+      restaurant_alias: restaurant.alias,
       name: restaurant.name,
       polyline: restaurant.polyline,
       logo: restaurant.logo,

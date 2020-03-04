@@ -3,7 +3,7 @@ defmodule MatchMenuWeb.RestaurantController do
 
   alias MatchMenu.Accounts
   alias MatchMenu.Accounts.Restaurant
-  alias MatchMenu.RestaurantGuardian
+  alias MatchMenu.Guardian
 
   action_fallback MatchMenuWeb.FallbackController
 
@@ -14,7 +14,7 @@ defmodule MatchMenuWeb.RestaurantController do
 
   def create(conn, params) do
     with {:ok, %Restaurant{} = restaurant} <- Accounts.create_restaurant(params),
-         {:ok, token, _claims} <- RestaurantGuardian.encode_and_sign(restaurant) do
+         {:ok, token, _claims} <- Guardian.encode_and_sign(restaurant) do
       conn
       |> put_status(:created)
       |> render("jwt.json", jwt: token)
@@ -22,7 +22,7 @@ defmodule MatchMenuWeb.RestaurantController do
   end
 
   def show(conn, _params) do
-    restaurant = RestaurantGuardian.Plug.current_resource(conn)
+    restaurant = Guardian.Plug.current_resource(conn)
     conn |> render("restaurant.json", restaurant: restaurant)
   end
 
