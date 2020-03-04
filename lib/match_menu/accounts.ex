@@ -10,6 +10,7 @@ defmodule MatchMenu.Accounts do
   alias MatchMenu.Accounts.Restaurant
   alias MatchMenu.Accounts.User
   alias MatchMenu.Guardian
+  alias MatchMenu.RestaurantGuardian
 
 
   @doc """
@@ -242,7 +243,7 @@ defmodule MatchMenu.Accounts do
   def resta_token_sign_in(restaurant_alias, password) do
       case alias_password_auth(restaurant_alias, password) do
         {:ok, restaurant} ->
-          Guardian.encode_and_sign(restaurant)
+          RestaurantGuardian.encode_and_sign(restaurant)
         _ ->
           {:error, :unauthorized}
       end
