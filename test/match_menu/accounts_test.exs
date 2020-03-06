@@ -130,4 +130,71 @@ defmodule MatchMenu.AccountsTest do
       assert %Ecto.Changeset{} = Accounts.change_restaurant(restaurant)
     end
   end
+
+  describe "employees" do
+    alias MatchMenu.Accounts.Employee
+
+    @valid_attrs %{employee_alias: "some employee_alias", name: "some name", password_hash: "some password_hash", restaurante_id: 42, roll_id: 42}
+    @update_attrs %{employee_alias: "some updated employee_alias", name: "some updated name", password_hash: "some updated password_hash", restaurante_id: 43, roll_id: 43}
+    @invalid_attrs %{employee_alias: nil, name: nil, password_hash: nil, restaurante_id: nil, roll_id: nil}
+
+    def employee_fixture(attrs \\ %{}) do
+      {:ok, employee} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Accounts.create_employee()
+
+      employee
+    end
+
+    test "list_employees/0 returns all employees" do
+      employee = employee_fixture()
+      assert Accounts.list_employees() == [employee]
+    end
+
+    test "get_employee!/1 returns the employee with given id" do
+      employee = employee_fixture()
+      assert Accounts.get_employee!(employee.id) == employee
+    end
+
+    test "create_employee/1 with valid data creates a employee" do
+      assert {:ok, %Employee{} = employee} = Accounts.create_employee(@valid_attrs)
+      assert employee.employee_alias == "some employee_alias"
+      assert employee.name == "some name"
+      assert employee.password_hash == "some password_hash"
+      assert employee.restaurante_id == 42
+      assert employee.roll_id == 42
+    end
+
+    test "create_employee/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_employee(@invalid_attrs)
+    end
+
+    test "update_employee/2 with valid data updates the employee" do
+      employee = employee_fixture()
+      assert {:ok, %Employee{} = employee} = Accounts.update_employee(employee, @update_attrs)
+      assert employee.employee_alias == "some updated employee_alias"
+      assert employee.name == "some updated name"
+      assert employee.password_hash == "some updated password_hash"
+      assert employee.restaurante_id == 43
+      assert employee.roll_id == 43
+    end
+
+    test "update_employee/2 with invalid data returns error changeset" do
+      employee = employee_fixture()
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_employee(employee, @invalid_attrs)
+      assert employee == Accounts.get_employee!(employee.id)
+    end
+
+    test "delete_employee/1 deletes the employee" do
+      employee = employee_fixture()
+      assert {:ok, %Employee{}} = Accounts.delete_employee(employee)
+      assert_raise Ecto.NoResultsError, fn -> Accounts.get_employee!(employee.id) end
+    end
+
+    test "change_employee/1 returns a employee changeset" do
+      employee = employee_fixture()
+      assert %Ecto.Changeset{} = Accounts.change_employee(employee)
+    end
+  end
 end
