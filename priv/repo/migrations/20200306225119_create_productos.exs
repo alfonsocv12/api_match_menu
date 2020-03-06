@@ -5,7 +5,7 @@ defmodule MatchMenu.Repo.Migrations.CreateProductos do
     create table(:productos) do
       add :name, :string
       add :price, :float
-      add :restaurant_id, references('restaurants')
+      add :restaurant_id, references(:restaurants)
 
       timestamps()
     end
