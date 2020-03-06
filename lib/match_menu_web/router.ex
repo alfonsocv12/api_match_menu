@@ -23,6 +23,8 @@ defmodule MatchMenuWeb.Router do
 
     post "/sign_in", UserController, :sign_in
     post "/sign_up", UserController, :create
+
+    resources "/productos", ProductosController, [:insert, :get, :get_list]
   end
 
   scope "/restaurant", MatchMenuWeb do
