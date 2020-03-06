@@ -27,5 +27,18 @@ defmodule MatchMenu.Catalogs do
       ** (Ecto.NoResultsError)
   """
   def get_employee_roll!(id), do: Repo.get!(EmployeeRoll, id)
-  
+
+  @doc """
+  Creates a employee_roll
+  ## Examples
+    iex> create_employee_roll(%{field: value})
+    {:ok, %EmployeeRoll{}}
+    iex> create_employee_roll(%{field: value})
+    {:error, %Ecto.Changeset{}}
+  """
+  def create_employee_roll(attrs \\ %{}) do
+    %EmployeeRoll{}
+    |>EmployeeRoll.changeset(attrs)
+    |>Repo.insert()
+  end
 end
