@@ -4,7 +4,6 @@ defmodule MatchMenu.Accounts do
   """
 
   import Ecto.Query, warn: false
-  # import Comeonin.Bcrypt, only: [verify_pass: 2, dummy_checkpw: 0]
 
   alias MatchMenu.Repo
   alias MatchMenu.Accounts.Restaurant

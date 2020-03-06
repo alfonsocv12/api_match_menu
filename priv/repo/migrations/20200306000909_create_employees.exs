@@ -4,6 +4,8 @@ defmodule MatchMenu.Repo.Migrations.CreateEmployees do
   def change do
     create table(:employee_roll) do
         add :roll_name, :string
+
+        timestamps()
     end
 
     create table(:employees) do
