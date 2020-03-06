@@ -18,8 +18,15 @@ defmodule MatchMenu.Accounts.Restaurant do
   @doc false
   def changeset(restaurant, attrs) do
     restaurant
-    |> cast(attrs, [:restaurant_alias, :name, :polyline, :logo, :password, :password_confirmation])
-    |> validate_required([:restaurant_alias, :name, :password, :password_confirmation])
+    |> cast(attrs, [
+        :restaurant_alias, :name,
+        :polyline, :logo,
+        :password, :password_confirmation]
+      )
+    |> validate_required([
+        :restaurant_alias, :name,
+        :password, :password_confirmation
+        ])
     |> validate_length(:password, min: 6)
     |> validate_confirmation(:password)
     |> unique_constraint(:restaurant_alias)
