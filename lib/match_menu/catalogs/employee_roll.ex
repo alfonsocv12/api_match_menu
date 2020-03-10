@@ -7,7 +7,7 @@ defmodule MatchMenu.Catalogs.EmployeeRoll do
 
     timestamps()
   end
-  
+
   @doc false
   def changeset(employee_roll, attrs) do
     employee_roll

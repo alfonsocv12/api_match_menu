@@ -52,6 +52,8 @@ defmodule MatchMenuWeb.Router do
   scope "/employee", MatchMenuWeb do
     pipe_through :api
 
+    get "/", EmployeeController, :index
+
     post "/sign_in", EmployeeController, :sign_in
     post "/sign_up", EmployeeController, :create
   end
@@ -62,4 +64,9 @@ defmodule MatchMenuWeb.Router do
     get "/my_info", EmployeeController, :show
   end
 
+  scope "/employee_roll", MatchMenuWeb do
+    pipe_through :api
+
+    get "/", EmployeeRollController, :index
+  end
 end

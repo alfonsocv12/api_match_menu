@@ -3,7 +3,7 @@ defmodule MatchMenuWeb.EmployeeView do
   alias MatchMenuWeb.EmployeeView
 
   def render("index.json", %{employees: employees}) do
-    %{data: render_many(employees, EmployeeView, "employee.json")}
+    %{data: render_many(employees, EmployeeView, "employees.json")}
   end
 
   def render("show.json", %{employee: employee}) do
