@@ -3,6 +3,7 @@ defmodule MatchMenuWeb.Router do
 
   alias MatchMenu.Guardian
   alias MatchMenu.RestaurantGuardian
+  alias MatchMenu.EmployeeGuardian
 
   pipeline :api do
     plug :accepts, ["json"]
@@ -13,7 +14,11 @@ defmodule MatchMenuWeb.Router do
   end
 
   pipeline :resta_jwt_authenticated do
-    plug RestaurantGuardian.AuthPipelineResta
+    plug RestaurantGuardian.AuthPipeline
+  end
+
+  pipeline :employee_jwt_authenticated do
+    plug EmployeeGuardian.AuthPipeline
   end
 
   scope "/", MatchMenuWeb do
@@ -23,6 +28,12 @@ defmodule MatchMenuWeb.Router do
 
     post "/sign_in", UserController, :sign_in
     post "/sign_up", UserController, :create
+  end
+
+  scope "/", MatchMenuWeb do
+    pipe_through [:api, :jwt_authenticated]
+
+    get "/my_user", UserController, :show
   end
 
   scope "/restaurant", MatchMenuWeb do
@@ -38,9 +49,17 @@ defmodule MatchMenuWeb.Router do
     get "/my_restaurant", RestaurantController, :show
   end
 
-  scope "/", MatchMenuWeb do
-    pipe_through [:api, :jwt_authenticated]
+  scope "/employee", MatchMenuWeb do
+    pipe_through :api
 
-    get "/my_user", UserController, :show
+    post "/sign_in", EmployeeController, :sign_in
+    post "/sign_up", EmployeeController, :create
   end
+
+  scope "/employee", MatchMenuWeb do
+    pipe_through [:api, :employee_jwt_authenticated]
+
+    get "/my_info", EmployeeController, :show
+  end
+
 end

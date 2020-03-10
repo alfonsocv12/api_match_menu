@@ -40,4 +40,13 @@ defmodule MatchMenuWeb.EmployeeController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  # def sign_in(conn, %{"employee_alias" => restaurant_alias, "password" => password}) do
+  #   case Accounts.resta_token_sign_in(restaurant_alias, password) do
+  #     {:ok, token, _claims} ->
+  #       conn |> render("jwt.json", jwt: token)
+  #     _ ->
+  #       {:error, :unauthorized}
+  #   end
+  # end
 end

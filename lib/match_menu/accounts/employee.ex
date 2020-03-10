@@ -23,11 +23,13 @@ defmodule MatchMenu.Accounts.Employee do
         :password_confirmation, :restaurante_id, :roll_id]
       )
     |> validate_required([
-        :employee_alias, :name, :password_hash,
-        :restaurante_id, :roll_id])
+        :employee_alias, :name, :password,
+        :password_confirmation,:restaurante_id, :roll_id]
+      )
     |> validate_length(:password, min: 6)
     |> validate_confirmation(:password)
     |> unique_constraint(:employee_alias)
+    |> check_if_exist
     |> put_password_hash
   end
 
@@ -40,4 +42,15 @@ defmodule MatchMenu.Accounts.Employee do
           changeset
     end
   end
+
+  defp check_if_exist(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{roll_id: roll_id}}
+        ->
+          MatchMenu.Catalogs.get_employee_roll!(roll_id)
+      _ ->
+          changeset
+    end
+  end
+
 end
