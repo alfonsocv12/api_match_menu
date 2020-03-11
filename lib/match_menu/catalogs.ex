@@ -28,6 +28,8 @@ defmodule MatchMenu.Catalogs do
   """
   def get_employee_roll!(id), do: Repo.get!(EmployeeRoll, id)
 
+  def get_employee_roll(id), do: Repo.get(EmployeeRoll, id)
+
   @doc """
   Creates a employee_roll
   ## Examples

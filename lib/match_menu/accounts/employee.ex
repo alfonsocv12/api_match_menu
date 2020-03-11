@@ -1,12 +1,14 @@
 defmodule MatchMenu.Accounts.Employee do
   use Ecto.Schema
   import Ecto.Changeset
+  alias MatchMenu.Catalogs
+  alias MatchMenu.Accounts
 
   schema "employees" do
     field :employee_alias, :string
     field :name, :string
     field :password_hash, :string
-    field :restaurante_id, :integer
+    field :restaurant_id, :integer
     field :roll_id, :integer
     #virtual fields
     field :password, :string, virtual: true
@@ -29,6 +31,8 @@ defmodule MatchMenu.Accounts.Employee do
     |> validate_length(:password, min: 6)
     |> validate_confirmation(:password)
     |> unique_constraint(:employee_alias)
+    |> check_if_restaurant_exist
+    |> check_if_roll_exist
     |> put_password_hash
   end
 
@@ -42,21 +46,24 @@ defmodule MatchMenu.Accounts.Employee do
     end
   end
 
-  # defp check_if_exist(changeset) do
-  #   case changeset do
-  #     %Ecto.Changeset{valid?: true, changes: %{roll_id: roll_id}}
-  #       ->
-  #         {:error, changeset} = MatchMenu.Catalogs.get_employee_roll!(roll_id)
-  #     _ ->
-  #         changeset.error
-  #   end
-  # case Repo.get_by(Employee, employee_alias: employee_alias) do
-  #   nil ->
-  #     Bcrypt.dummy_checkpw()
-  #     {:error, "Login error."}
-  #   employee ->
-  #     {:ok, employee}
-  # end
-  # end
+  defp check_if_restaurant_exist(%{valid?: true,
+      changes: %{restaurant_id: restaurant_id}} = changeset) do
+    case Accounts.get_restaurant() do
+      nil ->
+        add_error(changeset, :restaurant_id, "That restaurant doesn't exist")
+      restaurant ->
+        changeset
+    end
+  end
+
+  defp check_if_roll_exist(%{valid?: true,
+    changes: %{roll_id: roll_id}} = changeset) do
+    case Catalogs.get_employee_roll(roll_id) do
+      nil ->
+        add_error(changeset, :roll_id, "That roll doesn't exist")
+      employee_roll ->
+        changeset
+    end
+  end
 
 end
