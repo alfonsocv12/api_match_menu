@@ -134,9 +134,9 @@ defmodule MatchMenu.AccountsTest do
   describe "employees" do
     alias MatchMenu.Accounts.Employee
 
-    @valid_attrs %{employee_alias: "some employee_alias", name: "some name", password_hash: "some password_hash", restaurante_id: 42, roll_id: 42}
-    @update_attrs %{employee_alias: "some updated employee_alias", name: "some updated name", password_hash: "some updated password_hash", restaurante_id: 43, roll_id: 43}
-    @invalid_attrs %{employee_alias: nil, name: nil, password_hash: nil, restaurante_id: nil, roll_id: nil}
+    @valid_attrs %{employee_alias: "some employee_alias", name: "some name", password_hash: "some password_hash", restaurant_id: 42, roll_id: 42}
+    @update_attrs %{employee_alias: "some updated employee_alias", name: "some updated name", password_hash: "some updated password_hash", restaurant_id: 43, roll_id: 43}
+    @invalid_attrs %{employee_alias: nil, name: nil, password_hash: nil, restaurant_id: nil, roll_id: nil}
 
     def employee_fixture(attrs \\ %{}) do
       {:ok, employee} =
@@ -162,7 +162,7 @@ defmodule MatchMenu.AccountsTest do
       assert employee.employee_alias == "some employee_alias"
       assert employee.name == "some name"
       assert employee.password_hash == "some password_hash"
-      assert employee.restaurante_id == 42
+      assert employee.restaurant_id == 42
       assert employee.roll_id == 42
     end
 
@@ -176,7 +176,7 @@ defmodule MatchMenu.AccountsTest do
       assert employee.employee_alias == "some updated employee_alias"
       assert employee.name == "some updated name"
       assert employee.password_hash == "some updated password_hash"
-      assert employee.restaurante_id == 43
+      assert employee.restaurant_id == 43
       assert employee.roll_id == 43
     end
 

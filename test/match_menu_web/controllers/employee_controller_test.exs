@@ -8,17 +8,17 @@ defmodule MatchMenuWeb.EmployeeControllerTest do
     employee_alias: "some employee_alias",
     name: "some name",
     password_hash: "some password_hash",
-    restaurante_id: 42,
+    restaurant_id: 42,
     roll_id: 42
   }
   @update_attrs %{
     employee_alias: "some updated employee_alias",
     name: "some updated name",
     password_hash: "some updated password_hash",
-    restaurante_id: 43,
+    restaurant_id: 43,
     roll_id: 43
   }
-  @invalid_attrs %{employee_alias: nil, name: nil, password_hash: nil, restaurante_id: nil, roll_id: nil}
+  @invalid_attrs %{employee_alias: nil, name: nil, password_hash: nil, restaurant_id: nil, roll_id: nil}
 
   def fixture(:employee) do
     {:ok, employee} = Accounts.create_employee(@create_attrs)
@@ -48,7 +48,7 @@ defmodule MatchMenuWeb.EmployeeControllerTest do
                "employee_alias" => "some employee_alias",
                "name" => "some name",
                "password_hash" => "some password_hash",
-               "restaurante_id" => 42,
+               "restaurant_id" => 42,
                "roll_id" => 42
              } = json_response(conn, 200)["data"]
     end
@@ -73,7 +73,7 @@ defmodule MatchMenuWeb.EmployeeControllerTest do
                "employee_alias" => "some updated employee_alias",
                "name" => "some updated name",
                "password_hash" => "some updated password_hash",
-               "restaurante_id" => 43,
+               "restaurant_id" => 43,
                "roll_id" => 43
              } = json_response(conn, 200)["data"]
     end

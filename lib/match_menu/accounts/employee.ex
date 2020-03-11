@@ -22,17 +22,16 @@ defmodule MatchMenu.Accounts.Employee do
     employee
     |> cast(attrs, [
         :employee_alias, :name, :password,
-        :password_confirmation, :restaurante_id, :roll_id]
+        :password_confirmation, :restaurant_id, :roll_id]
       )
     |> validate_required([
         :employee_alias, :name, :password,
-        :password_confirmation,:restaurante_id, :roll_id]
+        :password_confirmation,:restaurant_id, :roll_id]
       )
     |> validate_length(:password, min: 6)
     |> validate_confirmation(:password)
     |> unique_constraint(:employee_alias)
-    |> check_if_restaurant_exist
-    |> check_if_roll_exist
+    |> check_if_relations_exist
     |> put_password_hash
   end
 
@@ -46,13 +45,13 @@ defmodule MatchMenu.Accounts.Employee do
     end
   end
 
-  defp check_if_restaurant_exist(%{valid?: true,
+  defp check_if_relations_exist(%{valid?: true,
       changes: %{restaurant_id: restaurant_id}} = changeset) do
-    case Accounts.get_restaurant() do
+    case Accounts.get_restaurant(restaurant_id) do
       nil ->
         add_error(changeset, :restaurant_id, "That restaurant doesn't exist")
-      restaurant ->
-        changeset
+      _ ->
+        check_if_roll_exist(changeset)
     end
   end
 
@@ -61,7 +60,7 @@ defmodule MatchMenu.Accounts.Employee do
     case Catalogs.get_employee_roll(roll_id) do
       nil ->
         add_error(changeset, :roll_id, "That roll doesn't exist")
-      employee_roll ->
+      _ ->
         changeset
     end
   end

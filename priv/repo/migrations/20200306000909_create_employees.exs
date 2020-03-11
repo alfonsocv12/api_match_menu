@@ -12,7 +12,7 @@ defmodule MatchMenu.Repo.Migrations.CreateEmployees do
       add :employee_alias, :string
       add :name, :string
       add :password_hash, :string
-      add :restaurante_id, references(:restaurants)
+      add :restaurant_id, references(:restaurants)
       add :roll_id, references(:employee_rolls)
 
       timestamps()

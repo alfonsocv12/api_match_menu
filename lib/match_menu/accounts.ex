@@ -140,6 +140,8 @@ defmodule MatchMenu.Accounts do
   """
   def get_restaurant!(id), do: Repo.get!(Restaurant, id)
 
+  def get_restaurant(id), do: Repo.get(Restaurant, id)
+
   @doc """
   Creates a restaurant.
   ## Examples

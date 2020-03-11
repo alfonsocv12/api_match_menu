@@ -14,7 +14,7 @@ defmodule MatchMenuWeb.EmployeeView do
     %{id: employee.id,
       employee_alias: employee.employee_alias,
       name: employee.name,
-      restaurante_id: employee.restaurante_id,
+      restaurant_id: employee.restaurant_id,
       roll_id: employee.roll_id}
   end
 

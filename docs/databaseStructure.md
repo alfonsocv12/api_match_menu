@@ -3,7 +3,7 @@
 |---------------|--------|--------|----------|------------------|----------------|--------|--|---------|
 | id            | Int    | unique | notnull  |                  | id             | int    |  | notnull |
 | Email         | String | unique | nullable |                  | name           | String |  | notnull |
-| Name          | String |        | Nullable |                  | restaurante_id | int    |  | notnull |
+| Name          | String |        | Nullable |                  | restaurant_id | int    |  | notnull |
 | Password-hash | String |        | Nullable |                  | roll_id        | int    |  | notnull |
 | uid           | String | unique | notnull  |                  |                |        |  |         |
 | phone         | String | unique | Nullable |                  |                |        |  |         |
@@ -23,7 +23,7 @@
 |               restauran                    |          |                    mesas                     |
 |---------------|--------|--------|----------|----------|----------------|----------|--------|---------|
 | id            | int    | unique |          |          | id             | int      | unique | notnull |
-| alias         | String | unique | notnull  |          | restaurante_id | int      |        | notnull |              
+| alias         | String | unique | notnull  |          | restaurant_id | int      |        | notnull |              
 | name          | String |        | notnull  |          | name           | int      |        | notnull |
 | polyline      | json   |        | notnull  |          | available      | tiny int |        | notnull |
 | logo          | url    |        | nullable |          |                |          |        |         |
@@ -37,7 +37,7 @@
 | id               | int | unique | notnull |             | id             | int    | unique | notnull |
 | producto_id      | int |        | notnull |             | name           | String |        | notnull |
 | user_id          | int |        | notnull |             | price          | Double |        | notnull |
-| table_session_id | int |        | notnull |             | restaurante_id | int    |        | notnull |
+| table_session_id | int |        | notnull |             | restaurant_id | int    |        | notnull |
 |------------------------------------------------------------------------------------------------------|
 
 
