@@ -13,5 +13,6 @@ defmodule MatchMenu.Catalogs.EmployeeRoll do
     employee_roll
     |> cast(attrs, [:roll_name])
     |> validate_required([:roll_name])
+    |> unique_constraint(:roll_name)
   end
 end

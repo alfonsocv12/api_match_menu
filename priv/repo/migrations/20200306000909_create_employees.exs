@@ -19,5 +19,6 @@ defmodule MatchMenu.Repo.Migrations.CreateEmployees do
     end
 
     create unique_index(:employees, [:employee_alias])
+    create unique_index(:employee_rolls, [:roll_name])
   end
 end

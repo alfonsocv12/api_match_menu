@@ -326,35 +326,35 @@ defmodule MatchMenu.Accounts do
   We start the authentication for restaurants here
   """
 
-  # def employee_token_sign_in(employee_alias, password) do
-  #     case alias_password_auth(restaurant_alias, password) do
-  #       {:ok, restaurant} ->
-  #         RestaurantGuardian.encode_and_sign(restaurant)
-  #       _ ->
-  #         {:error, :unauthorized}
-  #     end
-  # end
-  #
-  # defp alias_password_auth(restaurant_alias, password) when is_binary(restaurant_alias) and is_binary(password) do
-  #     with {:ok, restaurant} <- get_by_restaurant_alias(restaurant_alias),
-  #     do: verify_password_resta(password, restaurant)
-  # end
-  #
-  # defp get_by_restaurant_alias(restaurant_alias) when is_binary(restaurant_alias) do
-  #   case Repo.get_by(Restaurant, restaurant_alias: restaurant_alias) do
-  #     nil ->
-  #       Bcrypt.dummy_checkpw()
-  #       {:error, "Login error."}
-  #     restaurant ->
-  #       {:ok, restaurant}
-  #   end
-  # end
-  #
-  # defp verify_password_resta(password, %Restaurant{} = restaurant) when is_binary(password) do
-  #   if Bcrypt.verify_pass(password, restaurant.password_hash) do
-  #     {:ok, restaurant}
-  #   else
-  #     {:error, :invalid_password}
-  #   end
-  # end
+  def employee_token_sign_in(employee_alias, password) do
+      case employee_alias_password_auth(employee_alias, password) do
+        {:ok, restaurant} ->
+          RestaurantGuardian.encode_and_sign(restaurant)
+        _ ->
+          {:error, :unauthorized}
+      end
+  end
+
+  defp employee_alias_password_auth(employee_alias, password) when is_binary(employee_alias) and is_binary(password) do
+      with {:ok, employee} <- get_by_employee_alias(employee_alias),
+      do: verify_password_employee(password, employee)
+  end
+
+  defp get_by_employee_alias(employee_alias) when is_binary(employee_alias) do
+    case Repo.get_by(Employee, employee_alias: employee_alias) do
+      nil ->
+        Bcrypt.dummy_checkpw()
+        {:error, "Login error."}
+      employee ->
+        {:ok, employee}
+    end
+  end
+
+  defp verify_password_employee(password, %Employee{} = employee) when is_binary(password) do
+    if Bcrypt.verify_pass(password, employee.password_hash) do
+      {:ok, employee}
+    else
+      {:error, :invalid_password}
+    end
+  end
 end

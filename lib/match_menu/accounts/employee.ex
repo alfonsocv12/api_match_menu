@@ -29,7 +29,6 @@ defmodule MatchMenu.Accounts.Employee do
     |> validate_length(:password, min: 6)
     |> validate_confirmation(:password)
     |> unique_constraint(:employee_alias)
-    |> check_if_exist
     |> put_password_hash
   end
 
@@ -43,14 +42,21 @@ defmodule MatchMenu.Accounts.Employee do
     end
   end
 
-  defp check_if_exist(changeset) do
-    case changeset do
-      %Ecto.Changeset{valid?: true, changes: %{roll_id: roll_id}}
-        ->
-          MatchMenu.Catalogs.get_employee_roll!(roll_id)
-      _ ->
-          changeset
-    end
-  end
+  # defp check_if_exist(changeset) do
+  #   case changeset do
+  #     %Ecto.Changeset{valid?: true, changes: %{roll_id: roll_id}}
+  #       ->
+  #         {:error, changeset} = MatchMenu.Catalogs.get_employee_roll!(roll_id)
+  #     _ ->
+  #         changeset.error
+  #   end
+  # case Repo.get_by(Employee, employee_alias: employee_alias) do
+  #   nil ->
+  #     Bcrypt.dummy_checkpw()
+  #     {:error, "Login error."}
+  #   employee ->
+  #     {:ok, employee}
+  # end
+  # end
 
 end

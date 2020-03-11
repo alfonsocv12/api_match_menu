@@ -37,6 +37,8 @@ defmodule MatchMenu.Catalogs do
     {:error, %Ecto.Changeset{}}
   """
   def create_employee_roll(attrs \\ %{}) do
+    require Logger
+    Logger.debug("No se porque esta aqui")
     %EmployeeRoll{}
     |>EmployeeRoll.changeset(attrs)
     |>Repo.insert()

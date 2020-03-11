@@ -3,6 +3,7 @@ defmodule MatchMenuWeb.EmployeeController do
 
   alias MatchMenu.Accounts
   alias MatchMenu.Accounts.Employee
+  alias MatchMenu.EmployeeGuardian
 
   action_fallback MatchMenuWeb.FallbackController
 
@@ -12,11 +13,11 @@ defmodule MatchMenuWeb.EmployeeController do
   end
 
   def create(conn, %{"employee" => employee_params}) do
-    with {:ok, %Employee{} = employee} <- Accounts.create_employee(employee_params) do
+    with {:ok, %Employee{} = employee} <- Accounts.create_employee(employee_params),
+         {:ok, token, _claims} <- EmployeeGuardian.encode_and_sign(employee) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", Routes.employee_path(conn, :show, employee))
-      |> render("show.json", employee: employee)
+      |> render("jwt.json", jwt: token)
     end
   end
 
@@ -41,12 +42,12 @@ defmodule MatchMenuWeb.EmployeeController do
     end
   end
 
-  # def sign_in(conn, %{"employee_alias" => restaurant_alias, "password" => password}) do
-  #   case Accounts.resta_token_sign_in(restaurant_alias, password) do
-  #     {:ok, token, _claims} ->
-  #       conn |> render("jwt.json", jwt: token)
-  #     _ ->
-  #       {:error, :unauthorized}
-  #   end
-  # end
+  def sign_in(conn, %{"employee_alias" => employee_alias, "password" => password}) do
+    case Accounts.employee_token_sign_in(employee_alias, password) do
+      {:ok, token, _claims} ->
+        conn |> render("jwt.json", jwt: token)
+      _ ->
+        {:error, :unauthorized}
+    end
+  end
 end

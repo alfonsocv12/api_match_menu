@@ -14,8 +14,11 @@ defmodule MatchMenuWeb.EmployeeView do
     %{id: employee.id,
       employee_alias: employee.employee_alias,
       name: employee.name,
-      password_hash: employee.password_hash,
       restaurante_id: employee.restaurante_id,
       roll_id: employee.roll_id}
+  end
+
+  def render "jwt.json", %{jwt: jwt} do
+    %{jwt: jwt}
   end
 end
