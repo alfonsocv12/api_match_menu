@@ -32,12 +32,12 @@
 
 
 |------------------------------------------------------------------------------------------------------|
-|                   ordenes                 |             |                productos                  |
+|                   ordenes                 |             |                 products                   |
 |------------------|-----|--------|---------|-------------|----------------|--------|--------|---------|
 | id               | int | unique | notnull |             | id             | int    | unique | notnull |
 | producto_id      | int |        | notnull |             | name           | String |        | notnull |
 | user_id          | int |        | notnull |             | price          | Double |        | notnull |
-| table_session_id | int |        | notnull |             | restaurant_id | int    |        | notnull |
+| table_session_id | int |        | notnull |             | restaurant_id  | int    |        | notnull |
 |------------------------------------------------------------------------------------------------------|
 
 
