@@ -15,7 +15,6 @@ defmodule MatchMenuWeb.ProductView do
       name: product.name,
       description: product.description,
       price: product.price,
-      restaurant_id: product.restaurant_id,
-      soft_delete: product.soft_delete}
+      restaurant_id: product.restaurant_id}
   end
 end
