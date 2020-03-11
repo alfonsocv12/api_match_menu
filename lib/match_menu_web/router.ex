@@ -69,4 +69,16 @@ defmodule MatchMenuWeb.Router do
 
     get "/", EmployeeRollController, :index
   end
+
+  scope "/products", MatchMenuWeb do
+    pipe_through :api
+
+    get "/list/:restaurant_id", ProductController, :restaurant_products
+  end
+
+  scope "/product", MatchMenuWeb do
+    pipe_through [:api, :resta_jwt_authenticated]
+
+    post "/", ProductController, :create_resta_product
+  end
 end

@@ -6,6 +6,7 @@ defmodule MatchMenu.Catalogs do
 
   alias MatchMenu.Repo
   alias MatchMenu.Catalogs.EmployeeRoll
+  alias MatchMenu.Catalogs.Product
 
   @doc """
   Returns the list of employee_roll,
@@ -39,10 +40,32 @@ defmodule MatchMenu.Catalogs do
     {:error, %Ecto.Changeset{}}
   """
   def create_employee_roll(attrs \\ %{}) do
-    require Logger
-    Logger.debug("No se porque esta aqui")
     %EmployeeRoll{}
     |>EmployeeRoll.changeset(attrs)
     |>Repo.insert()
+  end
+
+  @doc """
+  Returns the list of restaurant_products
+  ### Examples
+    iex> list_restaurant_products
+    [%Product{}, ...]
+  """
+  def list_restaurant_products(id) do
+    Repo.all(from(product in Product, where: product.restaurant_id == ^id))
+  end
+  
+  @doc """
+  Creates a restaurant_product
+  ### Examples
+    iex> create_resta_product(%field: value)
+    {:ok, %EmployeeRoll{}}
+    iex> create_resta_product(%field: value)
+    {:error, %EmployeeRoll{}}
+  """
+  def create_resta_product(attrs \\ %{}) do
+    %Product{}
+    |> Product.changeset(attrs)
+    |> Repo.insert()
   end
 end

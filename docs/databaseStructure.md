@@ -23,7 +23,7 @@
 |               restauran                    |          |                    mesas                     |
 |---------------|--------|--------|----------|----------|----------------|----------|--------|---------|
 | id            | int    | unique |          |          | id             | int      | unique | notnull |
-| alias         | String | unique | notnull  |          | restaurant_id | int      |        | notnull |              
+| alias         | String | unique | notnull  |          | restaurant_id  | int      |        | notnull |              
 | name          | String |        | notnull  |          | name           | int      |        | notnull |
 | polyline      | json   |        | notnull  |          | available      | tiny int |        | notnull |
 | logo          | url    |        | nullable |          |                |          |        |         |
