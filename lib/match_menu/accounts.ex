@@ -4,7 +4,6 @@ defmodule MatchMenu.Accounts do
   """
 
   import Ecto.Query, warn: false
-  # import Comeonin.Bcrypt, only: [verify_pass: 2, dummy_checkpw: 0]
 
   alias MatchMenu.Repo
   alias MatchMenu.Accounts.Restaurant
@@ -141,6 +140,8 @@ defmodule MatchMenu.Accounts do
   """
   def get_restaurant!(id), do: Repo.get!(Restaurant, id)
 
+  def get_restaurant(id), do: Repo.get(Restaurant, id)
+
   @doc """
   Creates a restaurant.
   ## Examples
@@ -226,4 +227,136 @@ defmodule MatchMenu.Accounts do
     end
   end
 
+
+  alias MatchMenu.Accounts.Employee
+
+  @doc """
+  Returns the list of employees.
+
+  ## Examples
+
+      iex> list_employees()
+      [%Employee{}, ...]
+
+  """
+  def list_employees do
+    Repo.all(Employee)
+  end
+
+  @doc """
+  Gets a single employee.
+
+  Raises `Ecto.NoResultsError` if the Employee does not exist.
+
+  ## Examples
+
+      iex> get_employee!(123)
+      %Employee{}
+
+      iex> get_employee!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_employee!(id), do: Repo.get!(Employee, id)
+
+  @doc """
+  Creates a employee.
+
+  ## Examples
+
+      iex> create_employee(%{field: value})
+      {:ok, %Employee{}}
+
+      iex> create_employee(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_employee(attrs \\ %{}) do
+    %Employee{}
+    |> Employee.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a employee.
+
+  ## Examples
+
+      iex> update_employee(employee, %{field: new_value})
+      {:ok, %Employee{}}
+
+      iex> update_employee(employee, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_employee(%Employee{} = employee, attrs) do
+    employee
+    |> Employee.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a employee.
+
+  ## Examples
+
+      iex> delete_employee(employee)
+      {:ok, %Employee{}}
+
+      iex> delete_employee(employee)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_employee(%Employee{} = employee) do
+    Repo.delete(employee)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking employee changes.
+
+  ## Examples
+
+      iex> change_employee(employee)
+      %Ecto.Changeset{source: %Employee{}}
+
+  """
+  def change_employee(%Employee{} = employee) do
+    Employee.changeset(employee, %{})
+  end
+
+  @doc """
+  We start the authentication for restaurants here
+  """
+
+  def employee_token_sign_in(employee_alias, password) do
+      case employee_alias_password_auth(employee_alias, password) do
+        {:ok, restaurant} ->
+          RestaurantGuardian.encode_and_sign(restaurant)
+        _ ->
+          {:error, :unauthorized}
+      end
+  end
+
+  defp employee_alias_password_auth(employee_alias, password) when is_binary(employee_alias) and is_binary(password) do
+      with {:ok, employee} <- get_by_employee_alias(employee_alias),
+      do: verify_password_employee(password, employee)
+  end
+
+  defp get_by_employee_alias(employee_alias) when is_binary(employee_alias) do
+    case Repo.get_by(Employee, employee_alias: employee_alias) do
+      nil ->
+        Bcrypt.dummy_checkpw()
+        {:error, "Login error."}
+      employee ->
+        {:ok, employee}
+    end
+  end
+
+  defp verify_password_employee(password, %Employee{} = employee) when is_binary(password) do
+    if Bcrypt.verify_pass(password, employee.password_hash) do
+      {:ok, employee}
+    else
+      {:error, :invalid_password}
+    end
+  end
 end

@@ -19,9 +19,14 @@ config :match_menu, MatchMenuWeb.Endpoint,
   live_view: [signing_salt: "eHVLgjTG"]
 
 # Configures Elixir's Logger
-config :logger, :console,
-  format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
+# config :logger, :console,
+#   format: "$time $metadata[$level] $message\n",
+#   metadata: [:request_id]
+config :logger, backends: [{LoggerFileBackend, :debug}]
+
+config :logger, :debug,
+  path: "./phxError.log",
+  level: :debug
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
@@ -33,7 +38,12 @@ config :match_menu, MatchMenu.Guardian,
 
 config :match_menu, MatchMenu.RestaurantGuardian,
       issuer: "MatchMenu",
-      secret_key: "RkjAPm8iRqrQzH8RYYGOAhiCay20oZ3JyUwtubCAabTD1aPOSgy7EjVV4Ku+Q+F3"
+      secret_key: "RkjAPm8iRqrQzH8RYYGOAhiCay21oZ3JyUwtubCAabTD1aPOSgy7EjVV4Ku+Q+F3"
+
+config :match_menu, MatchMenu.EmployeeGuardian,
+      issuer: "MatchMenu",
+      secret_key: "RkjAPm8iRqrQzH8RYYGOAhiCay22oZ3JyUwtubCAabTD1aPOSgy7EjVV4Ku+Q+F3"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
