@@ -23,7 +23,7 @@
 |               restauran                    |          |                    mesas                     |
 |---------------|--------|--------|----------|----------|----------------|----------|--------|---------|
 | id            | int    | unique |          |          | id             | int      | unique | notnull |
-| alias         | String | unique | notnull  |          | restaurant_id | int      |        | notnull |              
+| alias         | String | unique | notnull  |          | restaurant_id  | int      |        | notnull |              
 | name          | String |        | notnull  |          | name           | int      |        | notnull |
 | polyline      | json   |        | notnull  |          | available      | tiny int |        | notnull |
 | logo          | url    |        | nullable |          |                |          |        |         |
@@ -32,12 +32,12 @@
 
 
 |------------------------------------------------------------------------------------------------------|
-|                   ordenes                 |             |                productios                  |
+|                   ordenes                 |             |                 products                   |
 |------------------|-----|--------|---------|-------------|----------------|--------|--------|---------|
 | id               | int | unique | notnull |             | id             | int    | unique | notnull |
 | producto_id      | int |        | notnull |             | name           | String |        | notnull |
 | user_id          | int |        | notnull |             | price          | Double |        | notnull |
-| table_session_id | int |        | notnull |             | restaurant_id | int    |        | notnull |
+| table_session_id | int |        | notnull |             | restaurant_id  | int    |        | notnull |
 |------------------------------------------------------------------------------------------------------|
 
 
