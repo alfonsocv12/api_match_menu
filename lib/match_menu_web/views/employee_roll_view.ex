@@ -6,6 +6,10 @@ defmodule MatchMenuWeb.EmployeeRollView do
     %{data: render_many(employee_rolls, EmployeeRollView, "employee_roll.json")}
   end
 
+  def render("show.json", %{employee_roll: employee_roll}) do
+    %{data: render_one(employee_roll, EmployeeRollView, "employee_roll.json")}
+  end
+
   def render("employee_roll.json", %{employee_roll: employee_roll}) do
     %{
       id: employee_roll.id,

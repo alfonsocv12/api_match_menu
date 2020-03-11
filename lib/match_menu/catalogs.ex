@@ -14,7 +14,7 @@ defmodule MatchMenu.Catalogs do
     [%EmployeeRoll{}, ...]
   """
   def list_employee_rolls do
-    Repo.all(EmployeeRoll)
+    Repo.all(from(roll in EmployeeRoll, where: roll.roll_name != "manager"))
   end
 
   @doc """
