@@ -19,9 +19,14 @@ config :match_menu, MatchMenuWeb.Endpoint,
   live_view: [signing_salt: "eHVLgjTG"]
 
 # Configures Elixir's Logger
-config :logger, :console,
-  format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
+# config :logger, :console,
+#   format: "$time $metadata[$level] $message\n",
+#   metadata: [:request_id]
+config :logger, backends: [{LoggerFileBackend, :debug}]
+
+config :logger, :debug,
+  path: "./phxError.log",
+  level: :debug
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason

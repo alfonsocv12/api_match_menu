@@ -2,7 +2,7 @@ defmodule MatchMenu.Catalogs.EmployeeRoll do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "employee_roll" do
+  schema "employee_rolls" do
     field :roll_name, :string
 
     timestamps()

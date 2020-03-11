@@ -25,6 +25,7 @@ defmodule MatchMenuWeb.Router do
     pipe_through :api
 
     get "/", BaseController, :index
+    get "/users", UserController, :index
 
     post "/sign_in", UserController, :sign_in
     post "/sign_up", UserController, :create

@@ -28,3 +28,5 @@ match_menu-*.tar
 /priv/static/
 
 *.DS_Store
+
+phxError.log

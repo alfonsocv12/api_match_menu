@@ -2,7 +2,7 @@ defmodule MatchMenu.Repo.Migrations.CreateEmployees do
   use Ecto.Migration
 
   def change do
-    create table(:employee_roll) do
+    create table(:employee_rolls) do
         add :roll_name, :string
 
         timestamps()
@@ -13,7 +13,7 @@ defmodule MatchMenu.Repo.Migrations.CreateEmployees do
       add :name, :string
       add :password_hash, :string
       add :restaurante_id, references(:restaurants)
-      add :roll_id, references(:employee_roll)
+      add :roll_id, references(:employee_rolls)
 
       timestamps()
     end
