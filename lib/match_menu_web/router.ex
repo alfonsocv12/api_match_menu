@@ -80,5 +80,6 @@ defmodule MatchMenuWeb.Router do
     pipe_through [:api, :resta_jwt_authenticated]
 
     post "/", ProductController, :create_resta_product
+    # delete "/:id", ProductController, :
   end
 end

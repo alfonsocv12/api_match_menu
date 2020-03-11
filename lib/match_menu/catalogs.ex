@@ -52,9 +52,10 @@ defmodule MatchMenu.Catalogs do
     [%Product{}, ...]
   """
   def list_restaurant_products(id) do
-    Repo.all(from(product in Product, where: product.restaurant_id == ^id))
+    Repo.all(from(product in Product, where: product.restaurant_id == ^id,
+      where: product.soft_delete == false))
   end
-  
+
   @doc """
   Creates a restaurant_product
   ### Examples
