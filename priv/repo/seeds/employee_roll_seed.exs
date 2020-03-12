@@ -10,17 +10,20 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 defmodule MatchMenu.DatabaseSeeder do
-  alias MatchMenu.Repo
   alias MatchMenu.Catalogs
 
   employee_roll_list = [
-    %{roll_name: "manager"},
-    %{roll_name: "waiter"},
-    %{roll_name: "hostest"},
-    %{roll_name: "chef"}
+    %{id:1, roll_name: "manager"},
+    %{id:2, roll_name: "waiter"},
+    %{id:3, roll_name: "hostest"},
+    %{id:4, roll_name: "chef"}
   ]
 
-  Enum.each(employee_roll_list, fn(data) ->
-    Catalogs.create_employee_roll(data)
-  end)
+  try do
+    Enum.each(employee_roll_list, fn(data) ->
+      Catalogs.create_employee_roll(data)
+    end)
+  rescue
+    IO.puts("Allready seed")
+  end
 end

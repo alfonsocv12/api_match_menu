@@ -7,6 +7,7 @@ defmodule MatchMenu.Catalogs do
   alias MatchMenu.Repo
   alias MatchMenu.Catalogs.EmployeeRoll
   alias MatchMenu.Catalogs.Product
+  alias MatchMenu.Catalogs.ProductType
 
   @doc """
   Returns the list of employee_roll,
@@ -67,6 +68,41 @@ defmodule MatchMenu.Catalogs do
   def create_resta_product(attrs \\ %{}) do
     %Product{}
     |> Product.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Returns the list of employee_roll,
+  ## Examples
+    iex> list_employee_rolls
+    [%EmployeeRoll{}, ...]
+  """
+  def list_product_types do
+    Repo.all(ProductType)
+  end
+
+  @doc """
+  Gets a single employee_roll.
+  Raises `Ecto.NoResultsError` if the EmployeeRoll does not exist.
+  ## Examples
+      iex> get_employee_roll!(123)
+      %EmployeeRoll{}
+      iex> get_employee_roll!(456)
+      ** (Ecto.NoResultsError)
+  """
+  def get_product_type(id), do: Repo.get(ProductType, id)
+
+  @doc """
+  Creates a restaurant_product
+  ### Examples
+    iex> create_resta_product(%field: value)
+    {:ok, %EmployeeRoll{}}
+    iex> create_resta_product(%field: value)
+    {:error, %EmployeeRoll{}}
+  """
+  def create_product_type(attrs \\ %{}) do
+    %ProductType{}
+    |> ProductType.changeset(attrs)
     |> Repo.insert()
   end
 end
