@@ -4,6 +4,7 @@ defmodule MatchMenuWeb.EmployeeController do
   alias MatchMenu.Accounts
   alias MatchMenu.Accounts.Employee
   alias MatchMenu.EmployeeGuardian
+  alias MatchMenu.RestaurantGuardian
 
   action_fallback MatchMenuWeb.FallbackController
 
@@ -13,7 +14,9 @@ defmodule MatchMenuWeb.EmployeeController do
   end
 
   def create(conn, %{"employee" => employee_params}) do
-    with {:ok, %Employee{} = employee} <- Accounts.create_employee(employee_params),
+    restaurant = RestaurantGuardian.Plug.current_resource(conn)
+    employee_map = Map.put(employee_params, "restaurant_id", restaurant.id)
+    with {:ok, %Employee{} = employee} <- Accounts.create_employee(employee_map),
          {:ok, token, _claims} <- EmployeeGuardian.encode_and_sign(employee) do
       conn
       |> put_status(:created)
