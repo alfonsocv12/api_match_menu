@@ -47,6 +47,7 @@ defmodule MatchMenuWeb.Router do
     pipe_through [:api, :resta_jwt_authenticated]
 
     get "/my_restaurant", RestaurantController, :show
+    post "/employee/sign_up", EmployeeController, :create
   end
 
   scope "/employee", MatchMenuWeb do
@@ -55,7 +56,6 @@ defmodule MatchMenuWeb.Router do
     get "/", EmployeeController, :index
 
     post "/sign_in", EmployeeController, :sign_in
-    post "/sign_up", EmployeeController, :create
   end
 
   scope "/employee", MatchMenuWeb do
