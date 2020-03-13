@@ -5,44 +5,44 @@ defmodule MatchMenu.Catalogs do
   import Ecto.Query, warn: false
 
   alias MatchMenu.Repo
-  alias MatchMenu.Catalogs.EmployeeRoll
+  alias MatchMenu.Catalogs.EmployeeRole
   alias MatchMenu.Catalogs.Product
   alias MatchMenu.Catalogs.ProductType
 
   @doc """
-  Returns the list of employee_roll,
+  Returns the list of employee_role,
   ## Examples
-    iex> list_employee_rolls
-    [%EmployeeRoll{}, ...]
+    iex> list_employee_roles
+    [%Employeerole{}, ...]
   """
-  def list_employee_rolls do
-    Repo.all(from(roll in EmployeeRoll, where: roll.roll_name != "manager"))
+  def list_employee_roles do
+    Repo.all(from(role in Employeerole, where: role.role_name != "manager"))
   end
 
   @doc """
-  Gets a single employee_roll.
-  Raises `Ecto.NoResultsError` if the EmployeeRoll does not exist.
+  Gets a single employee_role.
+  Raises `Ecto.NoResultsError` if the Employeerole does not exist.
   ## Examples
-      iex> get_employee_roll!(123)
-      %EmployeeRoll{}
-      iex> get_employee_roll!(456)
+      iex> get_employee_role!(123)
+      %Employeerole{}
+      iex> get_employee_role!(456)
       ** (Ecto.NoResultsError)
   """
-  def get_employee_roll!(id), do: Repo.get!(EmployeeRoll, id)
+  def get_employee_role!(id), do: Repo.get!(Employeerole, id)
 
-  def get_employee_roll(id), do: Repo.get(EmployeeRoll, id)
+  def get_employee_role(id), do: Repo.get(Employeerole, id)
 
   @doc """
-  Creates a employee_roll
+  Creates a employee_role
   ## Examples
-    iex> create_employee_roll(%{field: value})
-    {:ok, %EmployeeRoll{}}
-    iex> create_employee_roll(%{field: value})
+    iex> create_employee_role(%{field: value})
+    {:ok, %Employeerole{}}
+    iex> create_employee_role(%{field: value})
     {:error, %Ecto.Changeset{}}
   """
-  def create_employee_roll(attrs \\ %{}) do
-    %EmployeeRoll{}
-    |>EmployeeRoll.changeset(attrs)
+  def create_employee_role(attrs \\ %{}) do
+    %Employeerole{}
+    |>Employeerole.changeset(attrs)
     |>Repo.insert()
   end
 
@@ -61,9 +61,9 @@ defmodule MatchMenu.Catalogs do
   Creates a restaurant_product
   ### Examples
     iex> create_resta_product(%field: value)
-    {:ok, %EmployeeRoll{}}
+    {:ok, %Employeerole{}}
     iex> create_resta_product(%field: value)
-    {:error, %EmployeeRoll{}}
+    {:error, %Employeerole{}}
   """
   def create_resta_product(attrs \\ %{}) do
     %Product{}
@@ -72,22 +72,22 @@ defmodule MatchMenu.Catalogs do
   end
 
   @doc """
-  Returns the list of employee_roll,
+  Returns the list of employee_role,
   ## Examples
-    iex> list_employee_rolls
-    [%EmployeeRoll{}, ...]
+    iex> list_employee_roles
+    [%Employeerole{}, ...]
   """
   def list_product_types do
     Repo.all(ProductType)
   end
 
   @doc """
-  Gets a single employee_roll.
-  Raises `Ecto.NoResultsError` if the EmployeeRoll does not exist.
+  Gets a single employee_role.
+  Raises `Ecto.NoResultsError` if the Employeerole does not exist.
   ## Examples
-      iex> get_employee_roll!(123)
-      %EmployeeRoll{}
-      iex> get_employee_roll!(456)
+      iex> get_employee_role!(123)
+      %Employeerole{}
+      iex> get_employee_role!(456)
       ** (Ecto.NoResultsError)
   """
   def get_product_type(id), do: Repo.get(ProductType, id)
@@ -96,9 +96,9 @@ defmodule MatchMenu.Catalogs do
   Creates a restaurant_product
   ### Examples
     iex> create_resta_product(%field: value)
-    {:ok, %EmployeeRoll{}}
+    {:ok, %Employeerole{}}
     iex> create_resta_product(%field: value)
-    {:error, %EmployeeRoll{}}
+    {:error, %Employeerole{}}
   """
   def create_product_type(attrs \\ %{}) do
     %ProductType{}
