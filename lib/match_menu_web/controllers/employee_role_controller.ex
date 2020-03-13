@@ -2,7 +2,6 @@ defmodule MatchMenuWeb.EmployeeRoleController do
   use MatchMenuWeb, :controller
 
   alias MatchMenu.Catalogs
-  # alias MatchMenu.Catalogs.Employeerole
 
   action_fallback MatchMenuWeb.FallbackController
 

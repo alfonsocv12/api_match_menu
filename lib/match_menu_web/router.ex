@@ -64,7 +64,7 @@ defmodule MatchMenuWeb.Router do
     get "/my_info", EmployeeController, :show
   end
 
-  scope "/employee_roll", MatchMenuWeb do
+  scope "/employee_role", MatchMenuWeb do
     pipe_through :api
 
     get "/", EmployeeRoleController, :index
