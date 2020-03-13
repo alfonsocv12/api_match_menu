@@ -16,7 +16,7 @@ defmodule MatchMenu.Catalogs do
     [%Employeerole{}, ...]
   """
   def list_employee_roles do
-    Repo.all(from(role in Employeerole, where: role.role_name != "manager"))
+    Repo.all(from(role in EmployeeRole, where: role.role_name != "manager"))
   end
 
   @doc """
@@ -28,9 +28,9 @@ defmodule MatchMenu.Catalogs do
       iex> get_employee_role!(456)
       ** (Ecto.NoResultsError)
   """
-  def get_employee_role!(id), do: Repo.get!(Employeerole, id)
+  def get_employee_role!(id), do: Repo.get!(EmployeeRole, id)
 
-  def get_employee_role(id), do: Repo.get(Employeerole, id)
+  def get_employee_role(id), do: Repo.get(EmployeeRole, id)
 
   @doc """
   Creates a employee_role
@@ -41,8 +41,8 @@ defmodule MatchMenu.Catalogs do
     {:error, %Ecto.Changeset{}}
   """
   def create_employee_role(attrs \\ %{}) do
-    %Employeerole{}
-    |>Employeerole.changeset(attrs)
+    %EmployeeRole{}
+    |>EmployeeRole.changeset(attrs)
     |>Repo.insert()
   end
 
