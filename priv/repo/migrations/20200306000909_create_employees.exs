@@ -2,8 +2,8 @@ defmodule MatchMenu.Repo.Migrations.CreateEmployees do
   use Ecto.Migration
 
   def change do
-    create table(:employee_rolls) do
-        add :roll_name, :string
+    create table(:employee_roles) do
+        add :role_name, :string
 
         timestamps()
     end
@@ -13,12 +13,12 @@ defmodule MatchMenu.Repo.Migrations.CreateEmployees do
       add :name, :string
       add :password_hash, :string
       add :restaurant_id, references(:restaurants)
-      add :roll_id, references(:employee_rolls)
+      add :role_id, references(:employee_roles)
 
       timestamps()
     end
 
     create unique_index(:employees, [:employee_alias])
-    create unique_index(:employee_rolls, [:roll_name])
+    create unique_index(:employee_roles, [:role_name])
   end
 end

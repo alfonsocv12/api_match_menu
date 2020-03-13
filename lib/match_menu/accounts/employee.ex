@@ -9,7 +9,7 @@ defmodule MatchMenu.Accounts.Employee do
     field :name, :string
     field :password_hash, :string
     field :restaurant_id, :integer
-    field :roll_id, :integer
+    field :role_id, :integer
     #virtual fields
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
@@ -22,11 +22,11 @@ defmodule MatchMenu.Accounts.Employee do
     employee
     |> cast(attrs, [
         :employee_alias, :name, :password,
-        :password_confirmation, :restaurant_id, :roll_id]
+        :password_confirmation, :restaurant_id, :role_id]
       )
     |> validate_required([
         :employee_alias, :name, :password,
-        :password_confirmation,:restaurant_id, :roll_id]
+        :password_confirmation,:restaurant_id, :role_id]
       )
     |> validate_length(:password, min: 6)
     |> validate_confirmation(:password)
@@ -51,15 +51,15 @@ defmodule MatchMenu.Accounts.Employee do
       nil ->
         add_error(changeset, :restaurant_id, "That restaurant doesn't exist")
       _ ->
-        check_if_roll_exist(changeset)
+        check_if_role_exist(changeset)
     end
   end
 
-  defp check_if_roll_exist(%{valid?: true,
-    changes: %{roll_id: roll_id}} = changeset) do
-    case Catalogs.get_employee_roll(roll_id) do
+  defp check_if_role_exist(%{valid?: true,
+    changes: %{role_id: role_id}} = changeset) do
+    case Catalogs.get_employee_role(role_id) do
       nil ->
-        add_error(changeset, :roll_id, "That roll doesn't exist")
+        add_error(changeset, :role_id, "That role doesn't exist")
       _ ->
         changeset
     end
