@@ -27,6 +27,11 @@ match_menu-*.tar
 # this depending on your deployment strategy.
 /priv/static/
 
+# For the mac os finder
 *.DS_Store
 
+# Since we are creating a log when we start the api.
 phxError.log
+
+# Since we are going to use enviroment variables we ignore
+.env

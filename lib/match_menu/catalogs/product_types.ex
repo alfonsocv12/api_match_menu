@@ -1,7 +1,6 @@
 defmodule MatchMenu.Catalogs.ProductType do
   use Ecto.Schema
   import Ecto.Changeset
-  alias MatchMenu.Accounts
 
   schema "product_types" do
     field :product_type_name, :string

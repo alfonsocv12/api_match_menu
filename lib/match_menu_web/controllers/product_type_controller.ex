@@ -2,8 +2,6 @@ defmodule MatchMenuWeb.ProductTypeController do
   use MatchMenuWeb, :controller
 
   alias MatchMenu.Catalogs
-  alias MatchMenu.Catalogs.ProductType
-  alias MatchMenu.RestaurantGuardian
 
   action_fallback MatchMenuWeb.FallbackController
 

@@ -3,6 +3,7 @@ defmodule MatchMenuWeb.TableController do
 
   alias MatchMenu.Tables
   alias MatchMenu.Tables.Table
+  alias MatchMenu.RestaurantGuardian
 
   action_fallback MatchMenuWeb.FallbackController
 
@@ -12,7 +13,10 @@ defmodule MatchMenuWeb.TableController do
   end
 
   def create(conn, %{"table" => table_params}) do
-    with {:ok, %Table{} = table} <- Tables.create_table(table_params) do
+    restaurant = RestaurantGuardian.Plug.current_resource(conn)
+    table_map = Map.put(table_params, "restaurant_id", restaurant.id)
+    
+    with {:ok, %Table{} = table} <- Tables.create_table(table_map) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.table_path(conn, :show, table))

@@ -16,6 +16,7 @@ defmodule MatchMenuWeb.EmployeeController do
   def create(conn, %{"employee" => employee_params}) do
     restaurant = RestaurantGuardian.Plug.current_resource(conn)
     employee_map = Map.put(employee_params, "restaurant_id", restaurant.id)
+    
     with {:ok, %Employee{} = employee} <- Accounts.create_employee(employee_map),
          {:ok, token, _claims} <- EmployeeGuardian.encode_and_sign(employee) do
       conn

@@ -1,6 +1,7 @@
 defmodule MatchMenu.Tables.Table do
   use Ecto.Schema
   import Ecto.Changeset
+  alias MatchMenu.Accounts
 
   schema "tables" do
     field :description, :string

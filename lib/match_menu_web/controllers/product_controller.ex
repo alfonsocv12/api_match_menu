@@ -10,6 +10,7 @@ defmodule MatchMenuWeb.ProductController do
   def create_resta_product(conn, %{"product" => product_params}) do
     restaurant = RestaurantGuardian.Plug.current_resource(conn)
     product_map = Map.put(product_params, "restaurant_id", restaurant.id)
+    
     with {:ok,
       %Product{} = product} <- Catalogs.create_resta_product(product_map) do
       conn
