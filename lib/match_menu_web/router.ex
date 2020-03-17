@@ -52,7 +52,7 @@ defmodule MatchMenuWeb.Router do
     post "/employee/sign_up", EmployeeController, :create
     post "/product/", ProductController, :create_resta_product
 
-    post '/table', TableController, :create
+    post "/table", TableController, :create
   end
 
   scope "/employee", MatchMenuWeb do
