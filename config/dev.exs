@@ -2,10 +2,10 @@ use Mix.Config
 
 # Configure your database
 config :match_menu, MatchMenu.Repo,
-  username: System.get_env("username"),
-  password: System.get_env("password"),
-  database: System.get_env("database"),
-  hostname: System.get_env("hostname"),
+  username: "postgres",
+  password: "1010",
+  database: "match_menu_dev",
+  hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
